@@ -1,0 +1,28 @@
+.cal {
+  position: relative;
+}
+button {
+  min-width: 60px;
+  min-height: 50px;
+}
+.buttons-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  align-items: center;
+}
+.buttons-line + .buttons-line {
+  margin-top: 5px;
+}
+.btn-result {
+  flex-grow: 1;
+}
+.screen-cal {
+  margin: 10px 0;
+  font-size: 20px;
+  padding: 8px 2px;
+  text-align: end;
+
+  
+  color: white;
+}
