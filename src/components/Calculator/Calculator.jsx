@@ -4,6 +4,10 @@ import "./Calculator.css";
 const Calculator = () => {
   const [input, setInput] = useState("");
 
+  // a,b , phep tinh
+  // = => a phep tinh b
+  // fnc = (a,b,pheptinh) => if(pheptinh === "+") {return a+b}
+
   const handleClick = (e) => {
     setInput(input + e.target.value);
   };
@@ -13,19 +17,69 @@ const Calculator = () => {
     }
   };
 
+  const buttonArr = [
+    ["C", "<-", "%", "/"],
+    ["7", "8", "9", "*"],
+    ["4", "5", "6", "-"],
+    ["1", "2", "3", "+"],
+    ["0", ".", "="],
+  ];
+
+  const handleClickBtn = (e) => {
+    const useHandleClickFncElements = [
+      "%",
+      "/",
+      "7",
+      "8",
+      "9",
+      "*",
+      "4",
+      "5",
+      "6",
+      "-",
+      "1",
+      "2",
+      "3",
+      "+",
+      "0",
+      ".",
+    ];
+
+    const value = e.target.value;
+    if (useHandleClickFncElements.includes(value)) {
+      handleClick(e);
+    } else if (value === "C") {
+      setInput("");
+    } else if (value === "<-") {
+      setInput(input.slice(0, -1));
+    } else {
+      setInput(eval(input));
+    }
+    console.log(e);
+  };
+
   return (
-    <div>
-      <div className="cal">
-        <input
-          onChange={(e) => setInput(e.target.value)}
-          className="screen-cal"
-          value={input}
-        />
-        <div className="buttons-line">
-          <button value="C" onClick={(e) => setInput("")}>
+    <div className="cal">
+      <input className="screen-cal" value={input} disabled />
+      {buttonArr.map((btns, index) => (
+        <div className="buttons-line" key={`btn-line-${index}`}>
+          {btns.map((btn) => (
+            <button
+              className={btn === "=" ? "btn-result" : ""}
+              key={btn}
+              value={btn}
+              onClick={handleClickBtn}
+            >
+              {btn}
+            </button>
+          ))}
+        </div>
+      ))}
+      {/* <div className="buttons-line">
+          <button value="C" onClick={() => setInput("")}>
             C
           </button>
-          <button value="-" onClick={(e) => setInput(input.slice(0, -1))}>
+          <button value="-" onClick={() => setInput(input.slice(0, -1))}>
             -
           </button>
           <button value="%" onClick={handleClick}>
@@ -84,11 +138,10 @@ const Calculator = () => {
           <button value="." onClick={handleClick}>
             .
           </button>
-          <button className="btn-result" onClick={(e) => setInput(eval(input))}>
+          <button className="btn-result" onClick={() => setInput(eval(input))}>
             =
           </button>
-        </div>
-      </div>
+        </div> */}
     </div>
   );
 };
